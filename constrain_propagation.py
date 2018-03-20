@@ -8,13 +8,19 @@ if __name__ == '__main__':
 
     board = df_matrix()
 
+    board.import_data('data.csv')
+
+    print(board)
+
     while np.sum(board.dfs)>0:
 
-        freecells = board.get_freeCells()
-        randid = np.random.randint(high=freecells.shape[0])
+        # The Node-consistency approach
+        mostconst = board.get_mostconst()
 
-        i = freecells[randid,0]
-        j = freecells[randid,1]
+        randid = np.random.randint(mostconst.shape[0])
+
+        i = mostconst[randid,0]
+        j = mostconst[randid,1]
         
         possible_set = board.domain-board.get_constraints(i,j)
         
@@ -27,7 +33,6 @@ if __name__ == '__main__':
             except BrokenConstraintError:
                 print('belo')
             print(board)
-            time.sleep(.1)
         else:
             continue
 

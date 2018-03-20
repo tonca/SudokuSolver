@@ -21,6 +21,6 @@ s.add(axioms)
 print(s.check()) # prints sat so axioms are coherents
 
 # classical refutation
-s.add(Not(Mortal(socrates)))
+s.add(Mortal(socrates))
 
 print(s.check()) # prints unsat so socrates is Mortal

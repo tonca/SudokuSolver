@@ -29,7 +29,7 @@ class df_matrix(matrix):
                     out = out + '| '
 
                 if int(self.get_symbol(i,j)) == 0:
-                    sym = ' '
+                    sym = '.'
                 else:
                     sym = str(self.get_symbol(i,j))
                 out = out + sym + ' ' 
@@ -43,7 +43,7 @@ class df_matrix(matrix):
                     out = out + '| '
 
                 if int(self.get_df(i,j)) == 0:
-                    sym = ' '
+                    sym = '.'
                 else:
                     sym = str(self.get_df(i,j))
                 out = out + sym + ' '
@@ -81,9 +81,11 @@ class df_matrix(matrix):
 
 
     def get_freeCells(self):
-        # print( np.transpose(np.where(self.matrix==0)).shape)
         return np.transpose(np.where(self.matrix==0))
 
+    def get_mostconst(self):
+        min_df = np.min(self.dfs[np.nonzero(self.dfs)])
+        return np.transpose(np.where(self.dfs==min_df))
 
     def compute_df(self,i,j):
         if self.get_symbol(i,j) != 0:
@@ -98,6 +100,11 @@ class df_matrix(matrix):
         for i in range(0,9):
             for j in range(0,9):
                 self.dfs[i,j] = self.compute_df(i,j)
+
+
+    def import_data(self,file):
+        self.matrix = np.genfromtxt(file, delimiter=',', dtype=int)
+        self.update_dfs()
 
 
     def add_symbol(self,i,j,sym):
