@@ -1,4 +1,4 @@
-from df_matrix import df_matrix, OccupiedCellError, BrokenConstraintError
+from df_sudoku import df_sudoku, OccupiedCellError, BrokenConstraintError
 import numpy as np
 import random
 import time
@@ -6,12 +6,14 @@ import time
 
 if __name__ == '__main__':
 
-    board = df_matrix()
+    board = df_sudoku()
+
+    board.import_data('data/extreme.csv')
 
     while np.sum(board.dfs)>0:
 
         freecells = board.get_freeCells()
-        randid = np.random.randint(high=freecells.shape[0])
+        randid = np.random.randint(freecells.shape[0])
 
         i = freecells[randid,0]
         j = freecells[randid,1]
@@ -27,7 +29,6 @@ if __name__ == '__main__':
             except BrokenConstraintError:
                 print('belo')
             print(board)
-            time.sleep(.1)
         else:
             continue
 

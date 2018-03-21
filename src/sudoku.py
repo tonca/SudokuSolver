@@ -1,20 +1,20 @@
 import numpy as np
 
 
-class matrix:
+class sudoku:
 
     domain = set(range(1,10))
     
     def __init__(self):
-        self.matrix = np.zeros((9,9), dtype=int)
+        self.sudoku = np.zeros((9,9), dtype=int)
 
     def add_symbol(self,i,j,sym):
         if not sym in self.domain:
             raise InvalidSymbolError()
-        self.matrix[i,j] = sym
+        self.sudoku[i,j] = sym
 
     def get_symbol(self,i,j):
-        return self.matrix[i,j]    
+        return self.sudoku[i,j]    
 
     def __str__(self):
 
@@ -46,7 +46,7 @@ class InvalidSymbolError(Exception):
 
 if __name__ == '__main__':
 
-    test = matrix()
+    test = sudoku()
 
     test.add_symbol(0,7,9)
     test.add_symbol(6,3,7)
